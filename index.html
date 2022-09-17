@@ -19,13 +19,56 @@
        <div id="card">
             
        </div> 
-       <p id="book">
-        Hello
-       </p>
-
-       <button id="newbook">
-            Add New Book
-       </button>
+       <button id="add-book">Add New Book</button>
+       <div id="form-container">
+            <form id="form">
+                <div id="item">
+                    <label for="title">
+                        Book Title
+                    </label>
+                    <div>
+                        <input type="text" id="title" required>
+                        <span></span>
+                    </div>
+                </div>
+                <div id="item">
+                    <label for="author">
+                        Author
+                    </label>
+                    <div>
+                        <input type="text" id="author" required>
+                        <span></span>
+                    </div>
+                </div>
+                <div id="item">
+                    <label for="pages">
+                        Number of Pages
+                    </label>
+                    <div>
+                        <input type="number" id="pages" required>
+                        <span></span>
+                    </div>
+                </div>
+                <div id="item">
+                    <label for="read-status">
+                        Read or not?
+                    </label>
+                    <div>
+                        <input type="checkbox" id="read-status" >
+                        <span></span>
+                    </div>
+                </div>
+                <div id="item">
+                    <button id="submit" type="submit">
+                        Submit
+                    </button>
+                    <button type="button">
+                        Cancel
+                    </button>
+                </div>
+            </form> 
+       </div>
+        
     </main>
     <script src="./scripts/script.js"></script>
 </body>
