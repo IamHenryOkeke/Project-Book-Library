@@ -16,7 +16,7 @@
         </nav>
     </header>
     <main id="mainContainer">
-       <div id="bookCard">
+       <div id="bookContainer">
             
        </div> 
        <button id="add-book">Add New Book</button>
@@ -28,7 +28,6 @@
                     </label>
                     <div>
                         <input type="text" id="title" required>
-                        <span></span>
                     </div>
                 </div>
                 <div id="item">
@@ -37,7 +36,6 @@
                     </label>
                     <div>
                         <input type="text" id="author" required>
-                        <span></span>
                     </div>
                 </div>
                 <div id="item">
@@ -46,7 +44,6 @@
                     </label>
                     <div>
                         <input type="number" id="pages" required>
-                        <span></span>
                     </div>
                 </div>
                 <div id="item">
@@ -54,21 +51,22 @@
                         Read or not?
                     </label>
                     <div>
-                        <input type="checkbox" id="read-status" >
-                        <span></span>
+                        <select name="read-status" id="read-status" required>
+                            <option value="Read">Read</option>
+                            <option value="Not yet">Not yet</option>
+                        </select>
                     </div>
                 </div>
-                <div id="item">
-                    <button id="submit" type="submit">
-                        Submit
-                    </button>
-                    <button type="button">
-                        Cancel
-                    </button>
-                </div>
             </form> 
+            <div id="button">
+                <button id="submit">
+                    Submit
+                </button>
+                <button id="cancel">
+                    Cancel
+                </button>
+            </div>
        </div>
-        
     </main>
     <script src="./scripts/script.js"></script>
 </body>
