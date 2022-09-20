@@ -1,56 +1,87 @@
 let myBookLibrary = [];
 
-let bookContainer = document.getElementById("bookContainer");
+const bookContainer = document.getElementById("bookContainer");
 
-let submitBTN = document.getElementById("submit");
+const submitBTN = document.getElementById("submit");
 
-let addNewBTN = document.getElementById("add-book");
+const addNewBTN = document.getElementById("add-book");
 
-let formContainer = document.getElementById("form-container");
+const formContainer = document.getElementById("form-container");
 
-let cancelBTN = document.getElementById("cancel");
+const cancelBTN = document.getElementById("cancel");
+
+function MyBooks(title, author, pages, read){
+    this.title = title;
+    this.author = author;
+    this.read = read;
+    this.pages = pages
+    // this.info = function(){
+    //   return (title + " by " + author + ", " + pages + " pages, " + read);
+    // }   
+}
+
+// MyBooks.prototype.changeReadStatus = function() {
+//     if(this.read = "Read"){
+//         this.read = "Not yet";
+//     } 
+// } 
+
+function createBookCard(item, index){
+    let cardContainer = document.createElement("div");
+    cardContainer.setAttribute('id','card-items');
+    cardContainer.setAttribute('data-index',index)
+    bookContainer.appendChild(cardContainer);
+    let bookTitle = document.createElement("h3");
+    bookTitle.innerText =  `${item.title}`;
+    let bookAuthor = document.createElement("h2");
+    bookAuthor.innerText =  `${item.author}`;
+    let bookPages = document.createElement("h4");
+    bookPages.innerText =  `${item.pages}`;
+    let readStatus = document.createElement("button");
+    readStatus.innerText =  `${item.read}`;
+    cardContainer.appendChild(bookTitle);
+    cardContainer.appendChild(bookAuthor);
+    cardContainer.appendChild(bookPages);
+    cardContainer.appendChild(readStatus);
+}
+
+
+function createObj(){
+    let titleInput = document.getElementById("title").value;
+    let authorInput = document.getElementById("author").value;
+    let pagesInput = document.getElementById("pages").value;
+    let readInput = document.getElementById("read-status").value;
+    const newBook = Object.create(MyBooks);
+    newBook.title = `"${titleInput}"`;
+    newBook.author = `${authorInput}`;
+    newBook.pages = `${pagesInput} pages`;
+    newBook.read = readInput;
+    return newBook
+}
 
 function addToMyBookLibrary(item){
     myBookLibrary.push(item);
 }
 
-function MyBooks(title, author, pages, read){
-    this.title = `"${title}"`;
-    this.author = `by ${author}`;
-    this.pages = `${pages} pages`;
-    this.read = read;
-    this.info = function(){
-      return (title + " by " + author + ", " + pages + " pages, " + read);
-    }   
-}
-
-MyBooks.prototype.changeReadStatus = function() {
-    if(this.read = "Read"){
-        this.read = "Not yet";
-    } 
-} 
-
-
 function displayLibrary(){
-    for(let item in myBookLibrary){
-        let cardContainer = document.createElement("div");
-        cardContainer.setAttribute('id','card-items');
-        bookContainer.appendChild(cardContainer);
-        let bookTitle = document.createElement("h3");
-        bookTitle.setAttribute("data-item", item)
-        bookTitle.innerText =  `${myBookLibrary[item].title}`;
-        let bookAuthor = document.createElement("h2");
-        bookAuthor.innerText =  `${myBookLibrary[item].author}`;
-        let bookPages = document.createElement("h4");
-        bookPages.innerText =  `${myBookLibrary[item].pages}`;
-        let readStatus = document.createElement("button");
-        readStatus.innerText =  `${myBookLibrary[item].read}`;
-        cardContainer.appendChild(bookTitle);
-        cardContainer.appendChild(bookAuthor);
-        cardContainer.appendChild(bookPages);
-        cardContainer.appendChild(readStatus);
-    }
+    let index = myBookLibrary.length-1
+    createBookCard(myBookLibrary[index], index)        
 }
+
+function removeForm(){
+    formContainer.style.display = "none";
+    addNewBTN.style.display = "block";
+}
+
+function deleteBook(index){
+    // deleteBookBtn
+    myBookLibrary.splice(index,1);
+    bookContainer.removeChild(bookContainer.children[index]);
+    displayLibrary();
+    // const child = document.getElementById('child');
+    // child.parentElement.remove();
+}
+
 
 addNewBTN.addEventListener("click", function(){
     formContainer.style.display = "block";
@@ -58,22 +89,13 @@ addNewBTN.addEventListener("click", function(){
 })
 
 submitBTN.addEventListener("click", function(){
-    let titleInput = document.getElementById("title").value;
-    let authorInput = document.getElementById("author").value;
-    let pagesInput = document.getElementById("pages").value;
-    let readInput = document.getElementById("read-status").value;
-    let newBook = new MyBooks(titleInput, authorInput, pagesInput, readInput);
-    addToMyBookLibrary(newBook);
+    let newObject = createObj()
+    addToMyBookLibrary(newObject);
     removeForm();
     displayLibrary();
-    myBookLibrary = [];
 })
 
-cancelBTN.addEventListener("click",removeForm)
+cancelBTN.addEventListener("click",removeForm);
 
-function removeForm(){
-    formContainer.style.display = "none";
-    addNewBTN.style.display = "block";
-}
+deleteBookBtn.addEventListener("click", deleteBook)
 
-console.log(myBookLibrary)
