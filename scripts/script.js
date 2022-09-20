@@ -1,4 +1,10 @@
-let myBookLibrary = [];
+let myBookLibrary = [
+    {title : "Purple", 
+    author : "Chimamanda Adiche",
+    pages : 223,
+    read : "Not Yet"
+}
+];
 
 const bookContainer = document.getElementById("bookContainer");
 
@@ -14,23 +20,14 @@ function MyBooks(title, author, pages, read){
     this.title = title;
     this.author = author;
     this.read = read;
-    this.pages = pages
-    // this.info = function(){
-    //   return (title + " by " + author + ", " + pages + " pages, " + read);
-    // }   
+    this.pages = pages 
 }
 
-// MyBooks.prototype.changeReadStatus = function() {
-//     if(this.read = "Read"){
-//         this.read = "Not yet";
-//     } 
-// } 
 
 function createBookCard(item, index){
     let cardContainer = document.createElement("div");
     cardContainer.setAttribute('id','card-items');
     cardContainer.setAttribute('data-index',index)
-    bookContainer.appendChild(cardContainer);
     let bookTitle = document.createElement("h3");
     bookTitle.innerText =  `${item.title}`;
     let bookAuthor = document.createElement("h2");
@@ -39,10 +36,20 @@ function createBookCard(item, index){
     bookPages.innerText =  `${item.pages}`;
     let readStatus = document.createElement("button");
     readStatus.innerText =  `${item.read}`;
+    let deleteButton = document.createElement('input');
+    deleteButton.setAttribute('class', 'Dbtn')
+    deleteButton.type = 'button';
+    deleteButton.value = 'Delete';
+    function deleteFunc() {
+        bookContainer.removeChild(cardContainer);
+    }
+    deleteButton.onclick = deleteFunc.bind(this);
     cardContainer.appendChild(bookTitle);
     cardContainer.appendChild(bookAuthor);
     cardContainer.appendChild(bookPages);
     cardContainer.appendChild(readStatus);
+    cardContainer.appendChild(deleteButton)
+    bookContainer.appendChild(cardContainer);
 }
 
 
@@ -73,16 +80,6 @@ function removeForm(){
     addNewBTN.style.display = "block";
 }
 
-function deleteBook(index){
-    // deleteBookBtn
-    myBookLibrary.splice(index,1);
-    bookContainer.removeChild(bookContainer.children[index]);
-    displayLibrary();
-    // const child = document.getElementById('child');
-    // child.parentElement.remove();
-}
-
-
 addNewBTN.addEventListener("click", function(){
     formContainer.style.display = "block";
     addNewBTN.style.display = "none";
@@ -97,5 +94,4 @@ submitBTN.addEventListener("click", function(){
 
 cancelBTN.addEventListener("click",removeForm);
 
-deleteBookBtn.addEventListener("click", deleteBook)
-
+displayLibrary()
