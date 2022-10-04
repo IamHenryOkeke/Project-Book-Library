@@ -16,11 +16,13 @@ const formContainer = document.getElementById("form-container");
 
 const cancelBTN = document.getElementById("cancel");
 
-function MyBooks(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.read = read;
-    this.pages = pages 
+class MyBooks{
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.read = read;
+        this.pages = pages 
+    }
 }
 
 
@@ -59,7 +61,7 @@ function createObj(){
     let authorInput = document.getElementById("author").value;
     let pagesInput = document.getElementById("pages").value;
     let readInput = document.getElementById("read-status").value;
-    const newBook = Object.create(MyBooks);
+    const newBook = new MyBooks(titleInput, authorInput, pagesInput, readInput);
     newBook.title = `"${titleInput}"`;
     newBook.author = `${authorInput}`;
     newBook.pages = `${pagesInput} pages`;
