@@ -35,6 +35,7 @@ function createBookCard(item, index){
     let bookPages = document.createElement("h4");
     bookPages.innerText =  `${item.pages}`;
     let readStatus = document.createElement("button");
+    readStatus.setAttribute("id","checked")
     readStatus.innerText =  `${item.read}`;
     let deleteButton = document.createElement('input');
     deleteButton.setAttribute('class', 'Dbtn')
